@@ -20,7 +20,7 @@ public class AccountsPage {
 	private By searchIcon = By.cssSelector("div#search button");
 	private By accHeaders = By.cssSelector("div#content > h2");
 
-	// page const...
+	// page constructor //Every page class will have its own constructor and it expects one driver.
 	public AccountsPage(WebDriver driver) {
 		this.driver = driver;
 		eleUtil = new ElementUtil(this.driver);

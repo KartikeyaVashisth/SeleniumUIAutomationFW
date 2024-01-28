@@ -27,7 +27,7 @@ public class DriverFactory {
 	WebDriver driver;
 	Properties prop;
 	OptionsManager optionsManager;
-	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>(); //Creating an object of the ThreadLocal<WebDriver> class. To make sure our test execution is smooth while working with multiple threads in the parallel test environment, we need to have concept of ThreadLocal.
 	
     private static final Logger log = LogManager.getLogger(DriverFactory.class);
 
@@ -35,7 +35,7 @@ public class DriverFactory {
 
 	public static String highlight = null;
 
-	public WebDriver initDriver(Properties prop) {
+	public WebDriver initDriver(Properties prop) { //Passing prop since we want to fetch values from Properties file.
 
 		String browserName = prop.getProperty("browser");
 		// String browserName = System.getProperty("browser");
@@ -57,7 +57,7 @@ public class DriverFactory {
 			} else {
 				// run it on local:
 				log.info("running it on local");
-				tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
+				tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions())); //Setting and initializing the ThreadLocal driver.
 			}
 			break;
 
@@ -110,12 +110,10 @@ public class DriverFactory {
 		try {
 			switch (browserName.toLowerCase().trim()) {
 			case "chrome":
-				tlDriver.set(
-						new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getChromeOptions()));
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getChromeOptions()));
 				break;
 			case "firefox":
-				tlDriver.set(
-						new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getFirefoxOptions()));
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getFirefoxOptions()));
 				break;
 			case "edge":
 				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getEdgeOptions()));
@@ -131,6 +129,10 @@ public class DriverFactory {
 
 	}
 
+	/**
+	 *  
+	 * @return the local thread copy of the driver
+	 */
 	public static WebDriver getDriver() {
 		return tlDriver.get();
 	}

@@ -17,7 +17,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
-@Epic("Epic 100: Design open cart login page")
+@Epic("Epic 100: Design open cart login page") //These annotations are coming from the Allure.
 @Story("US 101: Login page features")
 @Feature("F50: Feature login page")
 @Listeners(TestAllureListener.class)
@@ -29,12 +29,12 @@ public class LoginPageTest extends BaseTest {
 	@Severity(SeverityLevel.MINOR)
 	@Test(priority = 1)
 	public void loginPageTitleTest() {
-		String actTitle = loginPage.getLoginPageTitle();
+		String actTitle = loginPage.getLoginPageTitle(); //No need of creation of object of the LoginPage class as we have extended BaseTest which has LoginPage object(Line 51). This will help so as to not create LoginPage object for each test @Test annotation
 		log.info("actual login page title: " + actTitle);
-		Assert.assertEquals(actTitle, AppConstants.LOGIN_PAGE_TITLE);
+		Assert.assertEquals(actTitle, AppConstants.LOGIN_PAGE_TITLE); //Objective of the test layer is to just call the methods of the page layer and assert. No actions on page elements(No Selenium code) should be written in the Test Layer.
 	}
 
-	@Description("login page url test verficication...")
+	@Description("login page url test verfication...")
 	@Severity(SeverityLevel.NORMAL)
 	@Test(priority = 2)
 	public void loginPageURLTest() {

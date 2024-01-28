@@ -13,7 +13,7 @@ import com.qa.opencart.constants.AppConstants;
 
 public class AccountsPageTest extends BaseTest {
 
-	@BeforeClass
+	@BeforeClass //Special pre condition for only Accounts page test that user need to be logged in first. @BeforeClass will be executed after @BeforeTest as per TestNG annotations sequence.
 	public void accSetUp() {
 		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
 	}

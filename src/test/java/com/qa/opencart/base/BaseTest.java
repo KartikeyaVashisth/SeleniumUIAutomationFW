@@ -20,9 +20,9 @@ import com.qa.opencart.pages.SearchResultsPage;
 public class BaseTest {
 	
 	protected WebDriver driver;
-	protected Properties prop;
+	protected Properties prop; //Without keyword 'protected' we cannot access the prop in the Child classes(Subclasses like LoginPageTest) of BaseTest(Parent Class). If kept 'default' i.e. without any access modifier, it cannot be accessed outside the package classes.
 	DriverFactory df;
-	protected LoginPage loginPage;
+	protected LoginPage loginPage; //All the references of Pages we are maintaining here because what if we later other tests need the object references of these page classes. So, since all the classes are inheriting the BaseTest, they can easily access. 
 	protected AccountsPage accPage;
 	protected SearchResultsPage searchResultsPage;
 	protected ProductInfoPage productInfoPage;
@@ -33,7 +33,7 @@ public class BaseTest {
 	
     private static final Logger log = LogManager.getLogger(BaseTest.class);
 
-	
+	//Before running any TestClass, the BaseTest class will be executed first.(Global precondition for all test classes)
 	@Parameters({"browser", "browserversion", "testname"})
 	@BeforeTest
 	public void setup(String browserName, String browserVersion, String testName) {
@@ -48,7 +48,7 @@ public class BaseTest {
 		}
 		
 		driver = df.initDriver(prop);
-		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(driver); //Object of LoginPage got created.
 		softAssert = new SoftAssert();
 	}
 	
