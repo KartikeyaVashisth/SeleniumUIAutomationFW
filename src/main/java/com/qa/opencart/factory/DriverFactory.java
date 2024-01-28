@@ -38,7 +38,7 @@ public class DriverFactory {
 	public WebDriver initDriver(Properties prop) { //Passing prop since we want to fetch values from Properties file.
 
 		String browserName = prop.getProperty("browser");
-		// String browserName = System.getProperty("browser");
+		// String browserName = System.getProperty("browser");//Another choice is to read it from the environment variable i.e. mvn clean install -Denv ="qa" -Dbrowser="Firefox"
 
 		//System.out.println("browser name is: " + browserName);
 		log.info("browser name is:" + browserName);
@@ -87,7 +87,7 @@ public class DriverFactory {
 		default:
 			//System.out.println("please pass the right browser name...." + browserName);
 			log.warn("please pass the right browser name...."+ browserName);
-			throw new FrameworkException("No Browser Found...");
+			throw new FrameworkException("No Browser Found..."); //Whenever we go to the else part or default part, better to throw one custom exception.
 		}
 
 		getDriver().manage().deleteAllCookies();
@@ -144,8 +144,8 @@ public class DriverFactory {
 		FileInputStream ip = null;
 		prop = new Properties();
 
-		String envName = System.getProperty("env");
-		//System.out.println("env name is: " + envName);
+		String envName = System.getProperty("env"); //To read environment variable in Java.
+		
 		log.info("env name is : " + envName);
 
 		try {
@@ -177,7 +177,7 @@ public class DriverFactory {
 				default:
 					//System.out.println("please pass the right env name..." + envName);
 					log.error("wrong env name : " + envName);
-					throw new FrameworkException("Wrong Env Name: " + envName);
+					throw new FrameworkException("Wrong Env Name: " + envName); //Whenever we go to the else part or default part, better to throw one custom exception.
 				}
 			}
 		} catch (FileNotFoundException e) {
