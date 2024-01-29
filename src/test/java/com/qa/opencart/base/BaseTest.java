@@ -33,7 +33,7 @@ public class BaseTest {
 	
     private static final Logger log = LogManager.getLogger(BaseTest.class);
 
-	//Before running any TestClass, the BaseTest class will be executed first.(Global precondition for all test classes)
+	//Before running any TestClass, the BaseTest class will be executed first.(Global precondition for all test classes) These parameter values will come from the runner file.
 	@Parameters({"browser", "browserversion", "testname"})
 	@BeforeTest
 	public void setup(String browserName, String browserVersion, String testName) {

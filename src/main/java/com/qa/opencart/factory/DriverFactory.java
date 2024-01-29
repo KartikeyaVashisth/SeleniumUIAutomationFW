@@ -27,7 +27,7 @@ public class DriverFactory {
 	WebDriver driver;
 	Properties prop;
 	OptionsManager optionsManager;
-	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>(); //Creating an object of the ThreadLocal<WebDriver> class. To make sure our test execution is smooth while working with multiple threads in the parallel test environment, we need to have concept of ThreadLocal.
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>(); //Creating an object of the ThreadLocal<WebDriver> class. To make sure our test execution is smooth while working with multiple threads in the parallel test environment, we need to have concept of ThreadLocal. With ThreadLocal we set() and get() the driver. 
 	
     private static final Logger log = LogManager.getLogger(DriverFactory.class);
 
@@ -40,7 +40,6 @@ public class DriverFactory {
 		String browserName = prop.getProperty("browser");
 		// String browserName = System.getProperty("browser");//Another choice is to read it from the environment variable i.e. mvn clean install -Denv ="qa" -Dbrowser="Firefox"
 
-		//System.out.println("browser name is: " + browserName);
 		log.info("browser name is:" + browserName);
 
 		highlight = prop.getProperty("highlight");
@@ -100,7 +99,7 @@ public class DriverFactory {
 	}
 
 	/**
-	 * run tests on grid
+	 * run tests on grid. RemoteWebDriver is the class responsible for running the TCs on remote machine or Selenium grid machine.
 	 * 
 	 * @param browserName
 	 */

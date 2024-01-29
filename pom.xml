@@ -129,7 +129,7 @@
 					<reuseForks>true</reuseForks>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>
-						<!-- <suiteXmlFile>${suiteXmlFile}</suiteXmlFile> -->
+						<!-- <suiteXmlFile>${suiteXmlFile}</suiteXmlFile> --> <!-- For the CI/CD pipeline, In the Jenkins file, for the stage Sanity test we have written mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml, so when the maven lifecycle will run the two runners file [testng_regression.xml and testng_sanity.xml] will contradict until make a variable name like in this line.-->
 					</suiteXmlFiles>
 
 					<argLine>
