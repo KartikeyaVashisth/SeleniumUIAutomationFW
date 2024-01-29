@@ -33,16 +33,16 @@ public class BaseTest {
 	
     private static final Logger log = LogManager.getLogger(BaseTest.class);
 
-	//Before running any TestClass, the BaseTest class will be executed first.(Global precondition for all test classes) These parameter values will come from the runner file.
-	@Parameters({"browser", "browserversion", "testname"})
+	//Before running any TestClass, the BaseTest class will be executed first.(Global precondition for all test classes) 
+	@Parameters({"browser", "browserversion", "testname"}) //These parameter values are coming from the runner file(testng_regression.xml).
 	@BeforeTest
-	public void setup(String browserName, String browserVersion, String testName) {
+	public void setup(String browserName, String browserVersion, String testName) { //As we know, we should also pass the same number of parameters in the method() as defined in the @Parameters annotation.
 		log.info(browserName + " : " + browserVersion + " " + testName);
 		df = new DriverFactory();
 		prop = df.initProp();
 		
-		if(browserName!=null) {
-			prop.setProperty("browser", browserName);
+		if(browserName!=null) { //IMPORTANT: There is a situation where we are reading the browser value from properties file [line 50] and [line 40 of DriverFactory] class , let's say Chrome but from testng_regression.xml file, the browser parameter value for a test block is Firefox or Safari, then it will contradict.
+			prop.setProperty("browser", browserName); //Since runner(.xml) file has more priority, so we are Setting here the value of browser and other parameters in the Properties file before reading it.
 			prop.setProperty("browserversion", browserVersion);
 			prop.setProperty("testname", testName);
 		}

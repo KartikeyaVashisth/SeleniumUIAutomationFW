@@ -37,7 +37,7 @@ public class DriverFactory {
 
 	public WebDriver initDriver(Properties prop) { //Passing prop since we want to fetch values from Properties file.
 
-		String browserName = prop.getProperty("browser");
+		String browserName = prop.getProperty("browser"); //Reading the browser value from the Properties file.
 		// String browserName = System.getProperty("browser");//Another choice is to read it from the environment variable i.e. mvn clean install -Denv ="qa" -Dbrowser="Firefox"
 
 		log.info("browser name is:" + browserName);
@@ -100,7 +100,7 @@ public class DriverFactory {
 
 	/**
 	 * run tests on grid. RemoteWebDriver is the class responsible for running the TCs on remote machine or Selenium grid machine.
-	 * 
+	 * This method is private because it is called internally to initialize the driver with RemoteWebDriver.
 	 * @param browserName
 	 */
 	private void initRemoteDriver(String browserName) {
@@ -151,7 +151,7 @@ public class DriverFactory {
 			if (envName == null) {
 				log.warn("your env is null...hence running tests on QA env...");
 				//System.out.println("your env is null...hence running tests on QA env...");
-				ip = new FileInputStream("./src/test/resources/config/config.qa.properties");
+				ip = new FileInputStream("./src/test/resources/config/config.qa.properties"); //If we want to run during local execution on stage or any other environment by right clicking on testng.xml file and run as TestNG, then we can set the same properties file path here that time. Generally, We pass the environment(mvn clean install -Denv="stage") during Maven Run where it picks and reads the respective properties file. 
 				log.info(ip);
 			}
 
